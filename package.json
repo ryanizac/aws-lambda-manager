@@ -1,0 +1,14 @@
+{
+  "name": "aws-lambda-manager",
+  "version": "1.0.0",
+  "description": "An application to manage AWS Lambda Functions for Node JS",
+  "author": "Ryan Izac <io.ryan@outlook.com>",
+  "license": "MIT",
+  "keywords": [
+    "aws",
+    "lambda",
+    "node"
+  ],
+  "main": "index.js",
+  "scripts": {}
+}
