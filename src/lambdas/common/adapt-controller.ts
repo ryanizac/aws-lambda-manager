@@ -1,5 +1,8 @@
 import type { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 import { Controller } from "../../core";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 type ControllerFactory = () => Controller;
 
