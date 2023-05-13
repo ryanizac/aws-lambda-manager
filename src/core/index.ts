@@ -4,3 +4,4 @@ export * from "./adapters";
 export * from "./repository";
 export * from "./errors";
 export * from "./controllers";
+export * from "./factory";
