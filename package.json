@@ -11,7 +11,9 @@
   ],
   "main": "index.js",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "makebundler": "esbuild src/bundler/index.ts --bundle --packages=external --format=cjs --outfile=dist/bundler/index.js",
+    "build": "npm run makebundler && node dist/bundler/index.js"
   },
   "lint-staged": {
     "*.ts": [
@@ -20,9 +22,13 @@
     ]
   },
   "devDependencies": {
+    "@aws-sdk/client-lambda": "^3.332.0",
+    "@types/adm-zip": "^0.5.0",
     "@types/aws-lambda": "^8.10.115",
     "@types/jest": "^29.5.1",
+    "@types/node": "^20.1.4",
     "@types/uuid": "^9.0.1",
+    "esbuild": "^0.17.19",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
     "lint-staged": "^13.2.2",
@@ -31,6 +37,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "adm-zip": "^0.5.10",
     "dotenv": "^16.0.3",
     "mysql2": "^3.3.1",
     "uuid": "^9.0.0"
