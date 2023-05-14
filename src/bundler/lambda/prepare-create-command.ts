@@ -9,13 +9,34 @@ export type Options = {
   content: Buffer;
   name: string;
   role?: string;
+  extractEnv?: string[];
 };
 
-export function prepareCreateCommand({ name, content, role }: Options) {
+export function prepareCreateCommand({
+  name,
+  content,
+  role,
+  extractEnv = [],
+}: Options) {
   role ||= process.env.role;
 
   if (!role) {
     throw new Error("The role is not provided");
+  }
+
+  const env = {};
+
+  for (const key of extractEnv) {
+    const value = process.env[key];
+
+    if (!value) {
+      throw new Error(`Env ${key} not found`);
+    }
+
+    Object.defineProperty(env, key, {
+      value,
+      enumerable: true,
+    });
   }
 
   const cmd = new CreateFunctionCommand({
@@ -26,6 +47,9 @@ export function prepareCreateCommand({ name, content, role }: Options) {
     Handler: "index.handler",
     PackageType: PackageType.Zip,
     Runtime: Runtime.nodejs16x,
+    Environment: {
+      Variables: env,
+    },
   });
 
   return cmd;

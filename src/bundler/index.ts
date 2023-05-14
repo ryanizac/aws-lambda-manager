@@ -21,6 +21,7 @@ async function main() {
     const cmd = prepareCreateCommand({
       name,
       content: zip,
+      extractEnv: ["host", "port", "user", "password"],
     });
 
     await lambdaClient.send(cmd);
